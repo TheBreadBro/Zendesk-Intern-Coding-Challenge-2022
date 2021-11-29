@@ -1,6 +1,8 @@
 from Core.APIhandler import APIhandler
 from Core.ticketprint import printPage,printTicket
 
+breakline = "-"*200
+
 class ticketViewer:
     def __init__(self,subdomain,email,password, token=False):
         self.subdomain = subdomain
@@ -18,6 +20,7 @@ class ticketViewer:
                 print("P: Previous Page")
             print("R: Return to Main Menu")
             selected = input("Select an option : ")
+            print(breakline)
             if selected == "R": break
             if currentpage["next_page"] and selected == "N":
                 currentpage = self.api.getJSON(currentpage['next_page'])
@@ -30,8 +33,6 @@ class ticketViewer:
         if ticket:
             print("\n\n")
             printTicket(ticket['ticket'])
-        else:
-            print("Not a valid ticket ID")
         input("Press Enter to continue")
-
+        print(breakline)
 

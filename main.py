@@ -1,6 +1,6 @@
 from Core.menuoptions import ticketViewer
 
-
+breakline = "-"*200
 def main():
     token = input("\n Are you using a token?(Enter Y for yes)")
     domain = input("\n Enter the Subdomain : ")
@@ -18,10 +18,12 @@ def main():
                 "2: View a ticket(by ID) \n",
                 "3: Quit")
         selected = input("Select an option : ")
+        print(breakline)
         if selected == '1':
             viewer.viewAllTickets()
         elif selected == '2':
             id = input("Input in an id : ")
+            print(breakline)
             viewer.viewTicket(id)
         elif selected == '3':
             print("Thank you for using Zendesk Ticket Viewer!")

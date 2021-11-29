@@ -13,17 +13,14 @@ class APIhandler:
         return self.getJSON(url)
 
 
-    def getPage(self, pageNum, pageSize = 20):
+    def getPage(self, pageNum, pageSize = 25):
         url = self.domain + "/api/v2/tickets.json?page={page_num}&per_page={page_size}".format(page_num=pageNum, page_size=pageSize)
         json = self.getJSON(url)
-        if json: 
-            return json
-        else:
-            return
+        return json
 
     def getJSON(self, url):
         request = requests.get(url,auth=self.auth)
-        if request.ok:
+        if request.status_code<400:
             return request.json()
         else:
             self.check_error(request)
@@ -31,10 +28,10 @@ class APIhandler:
 
     def check_error(self, request):
         if request.status_code < 200 or request.status_code > 404:
-            print("Request failed with code {code}".format(code=request.status_code))
+            raise Exception("Request failed with code {code}".format(code=request.status_code))
         elif request.status_code == 401:
-            print("Invalid Login")
+            raise Exception("Invalid Login")
         elif request.status_code == 403:
-            print("Access Denied")
+            raise Exception("Access Denied")
         elif request.status_code == 404:
             print("Ticket not Found")

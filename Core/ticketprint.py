@@ -17,6 +17,7 @@ def printPage(page):
 def printTicket(ticket):
     print("ID: ",ticket['id'])
     print("Status: ",ticket['status'])
+    print("Priority: ",ticket['priority'])
     print("Created At: ",ticket['created_at'])
     print("Created By: ",ticket['requester_id'],"\n")
     print("Subject: ",textwrap.fill(ticket['subject'],width=100),"\n")
