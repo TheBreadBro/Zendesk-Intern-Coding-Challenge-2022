@@ -11,6 +11,9 @@ import unittest
 from unittest.mock import patch, Mock
 import requests
 
+from io import StringIO
+from contextlib import redirect_stdout
+
 #Sample test tickets
 tickets = [
             {
@@ -89,10 +92,6 @@ class TestAPIhandler(unittest.TestCase):
         self.assertRaises(Exception,self.api.check_error,response)
 
         mock_get.return_value.status_code = 403
-        response = requests.get("")
-        self.assertRaises(Exception,self.api.check_error,response)
-
-        mock_get.return_value.status_code = 404
         response = requests.get("")
         self.assertRaises(Exception,self.api.check_error,response)
 
